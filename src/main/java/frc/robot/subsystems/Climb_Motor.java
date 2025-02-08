@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Climb_Motor extends SubsystemBase {
   /** Creates a new Climb_Motor. */
 
-  private final SparkMax m_climbMotor = new SparkMax(0, MotorType.kBrushless);
+  //private final SparkMax m_climbMotor = new SparkMax(0, MotorType.kBrushless);
 
 
   public Climb_Motor() {
@@ -20,7 +20,7 @@ public class Climb_Motor extends SubsystemBase {
   }
 
   public void setClimbMotorSpeed(double speed) {
-    m_climbMotor.set(speed);
+    //m_climbMotor.set(speed);
   }
   @Override
   public void periodic() {

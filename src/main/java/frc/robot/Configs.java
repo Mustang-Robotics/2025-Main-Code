@@ -54,4 +54,16 @@ public final class Configs {
                     .positionWrappingInputRange(0, turningFactor);
         }
     }
+
+    public static final class Elevator {
+        public static final SparkMaxConfig elevatorConfig = new SparkMaxConfig();
+
+        static {
+                elevatorConfig
+                .idleMode(IdleMode.kBrake)
+                .smartCurrentLimit(60)
+                .voltageCompensation(12);
+
+        }
+    }
 }
