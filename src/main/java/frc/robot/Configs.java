@@ -64,6 +64,26 @@ public final class Configs {
                 .smartCurrentLimit(60)
                 .voltageCompensation(12);
 
+                elevatorConfig
+                .closedLoop.feedbackSensor(FeedbackSensor.kPrimaryEncoder)
+                .p(.001)
+                .outputRange(-.5, .5)
+                .maxMotion
+                .maxVelocity(100)
+                .maxAcceleration(100)
+                .allowedClosedLoopError(3);
+
+        }
+    }
+
+    public static final class Climb {
+        public static final SparkMaxConfig climbConfig = new SparkMaxConfig();
+
+        static {
+                climbConfig
+                .idleMode(IdleMode.kBrake)
+                .smartCurrentLimit(60)
+                .inverted(true);
         }
     }
 }

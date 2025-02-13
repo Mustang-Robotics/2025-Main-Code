@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.OIConstants;
+import frc.robot.subsystems.Climb;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.Elevator;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -27,7 +28,7 @@ public class RobotContainer {
   // The robot's subsystems
   private final DriveSubsystem m_robotDrive = new DriveSubsystem();
   private final Elevator m_elevator = new Elevator();
-
+  private final Climb m_climb = new Climb();
   // The driver's controller
   CommandXboxController m_driverController = new CommandXboxController(OIConstants.kDriverControllerPort);
   private final SendableChooser<Command> m_chooser;  
@@ -51,10 +52,10 @@ public class RobotContainer {
                 true),
             m_robotDrive));
         
-        m_elevator.setDefaultCommand(
+        m_climb.setDefaultCommand(
           new RunCommand(
-            () -> m_elevator.setElevatorSpeed(m_driverController.getRightTriggerAxis()-m_driverController.getLeftTriggerAxis()),
-          m_elevator));
+            () -> m_climb.setClimbSpeed(m_driverController.getRightTriggerAxis()-m_driverController.getLeftTriggerAxis()),
+          m_climb));
 
   }
 
