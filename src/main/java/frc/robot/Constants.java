@@ -89,7 +89,9 @@ public final class Constants {
 
   public static final class OIConstants {
     public static final int kDriverControllerPort = 0;
+    public static final int kSelectorControllerPort = 2;
     public static final double kDriveDeadband = 0.05;
+  
   }
 
   public static final class AutoConstants {
