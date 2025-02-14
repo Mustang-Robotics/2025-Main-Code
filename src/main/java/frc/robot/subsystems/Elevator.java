@@ -23,6 +23,7 @@ public class Elevator extends SubsystemBase {
 private final SparkMax m_elevator = new SparkMax(7, MotorType.kBrushless);
 private SparkClosedLoopController elevatorClosedLoopController = m_elevator.getClosedLoopController();
 private RelativeEncoder elevatorEncoder = m_elevator.getEncoder();
+public double elevatorTarget = 0;
 
   public Elevator() {
 
@@ -39,9 +40,18 @@ private RelativeEncoder elevatorEncoder = m_elevator.getEncoder();
 
   }
 
-  public void moveToSetpoint(double elevatorTarget) {
+  public void changeSetpoint(double setpoint) {
+    elevatorTarget = setpoint;
+  }
+
+  private void moveToSetpoint() {
     
     elevatorClosedLoopController.setReference(
         elevatorTarget, ControlType.kMAXMotionPositionControl);
+  }
+
+  @Override
+  public void periodic() {
+    moveToSetpoint();
   }
 }

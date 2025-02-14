@@ -5,19 +5,16 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.subsystems.Elevator;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class Set_Elevator_Height_Command extends Command {
-  /** Creates a new Set_Elevator_Height_Command. */
+public class HomeElevator extends Command {
+  /** Creates a new Home_Elevator. */
+
   Elevator m_Elevator;
-  double m_height;
-
-  double tolerance;
-
-  public Set_Elevator_Height_Command(Elevator elevator, double height) {
-    m_Elevator = elevator;
-    m_height = height;
+  public HomeElevator(Elevator elevator) {
+   m_Elevator=elevator;
     addRequirements(m_Elevator);
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -28,12 +25,13 @@ public class Set_Elevator_Height_Command extends Command {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    //m_Elevator.setElevatorSpeed(.1);
+    //new WaitCommand(.5);
+    //m_Elevator.setElevatorSpeed(-.1);
+  }
 
   // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {}
 
-  // Returns true when the command should end.
 
 }

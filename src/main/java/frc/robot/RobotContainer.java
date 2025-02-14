@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.OIConstants;
+import frc.robot.Constants.ElevatorHeights;
 import frc.robot.subsystems.Climb;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.Elevator;
@@ -71,10 +72,27 @@ public class RobotContainer {
    * {@link JoystickButton}.
    */
   private void configureButtonBindings() {
+    //Driver Controller Configs
     m_driverController.x()
         .whileTrue(new RunCommand(
             () -> m_robotDrive.setX(),
             m_robotDrive));
+    
+    //Operator Controller Configs
+    m_operatorController.pov(270)
+      .onTrue(new RunCommand(
+      () -> m_elevator.changeSetpoint(ElevatorHeights.kL1Height)));
+    m_operatorController.pov(180)
+      .onTrue(new RunCommand(
+      () -> m_elevator.changeSetpoint(ElevatorHeights.kL2Height)));
+    m_operatorController.pov(90)
+      .onTrue(new RunCommand(
+      () -> m_elevator.changeSetpoint(ElevatorHeights.kL3Height)));
+    m_operatorController.pov(0)
+      .onTrue(new RunCommand(
+      () -> m_elevator.changeSetpoint(ElevatorHeights.kL4Height)));
+
+
   
   }
 

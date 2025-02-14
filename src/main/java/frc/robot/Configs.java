@@ -65,7 +65,10 @@ public final class Configs {
                 .smartCurrentLimit(60)
                 .inverted(true)
                 .voltageCompensation(12);
-                
+
+                elevatorConfig
+                .encoder
+                .positionConversionFactor(100);
 
                 elevatorConfig
                 .closedLoop.feedbackSensor(FeedbackSensor.kPrimaryEncoder)

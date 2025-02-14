@@ -111,6 +111,13 @@ public final class Constants {
     public static final double kFreeSpeedRpm = 6784;
   }
 
+  public static class ElevatorHeights {
+    public static final double kL1Height = 250;
+    public static final double kL2Height = 1000;
+    public static final double kL3Height = 1500;
+    public static final double kL4Height = 2500;
+    public static final double kCorralStation = 250;
+  }
    public static class Vision {
         public static final String kCameraName = "Arducam_OV9281_USB_Camera";
         //public static final String objectCamera = "USB_Camera";
@@ -120,7 +127,7 @@ public final class Constants {
 
         // The layout of the AprilTags on the field
         public static final AprilTagFieldLayout kTagLayout =
-                AprilTagFieldLayout.loadField(AprilTagFields.k2025Reefscape);
+                AprilTagFieldLayout.loadField(AprilTagFields.kDefaultField);
         
 
         // The standard deviations of our vision estimated poses, which affect correction rate
