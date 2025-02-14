@@ -1,5 +1,6 @@
 package frc.robot;
 
+import com.revrobotics.spark.config.EncoderConfig;
 import com.revrobotics.spark.config.SparkFlexConfig;
 import com.revrobotics.spark.config.SparkMaxConfig;
 import com.revrobotics.spark.config.ClosedLoopConfig.FeedbackSensor;
@@ -62,15 +63,17 @@ public final class Configs {
                 elevatorConfig
                 .idleMode(IdleMode.kBrake)
                 .smartCurrentLimit(60)
+                .inverted(true)
                 .voltageCompensation(12);
+                
 
                 elevatorConfig
                 .closedLoop.feedbackSensor(FeedbackSensor.kPrimaryEncoder)
-                .p(.001)
+                .p(.004)
                 .outputRange(-.5, .5)
                 .maxMotion
-                .maxVelocity(100)
-                .maxAcceleration(100)
+                .maxVelocity(10)
+                .maxAcceleration(10)
                 .allowedClosedLoopError(3);
 
         }

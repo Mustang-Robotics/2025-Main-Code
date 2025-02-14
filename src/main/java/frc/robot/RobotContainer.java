@@ -32,6 +32,7 @@ public class RobotContainer {
   private final Climb m_climb = new Climb();
   // The driver's controller
   CommandXboxController m_driverController = new CommandXboxController(OIConstants.kDriverControllerPort);
+  CommandXboxController m_operatorController = new CommandXboxController(1);
   private final SendableChooser<Command> m_chooser;  
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -57,7 +58,7 @@ public class RobotContainer {
           new RunCommand(
             () -> m_climb.setClimbSpeed(m_driverController.getRightTriggerAxis()-m_driverController.getLeftTriggerAxis()),
           m_climb));
-PathPlannerPath A = PathPlannerPath.fromPathFile("A");
+//PathPlannerPath A = PathPlannerPath.fromPathFile("A");
   }
 
   /**
