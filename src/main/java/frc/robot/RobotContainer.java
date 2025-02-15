@@ -94,7 +94,7 @@ public class RobotContainer {
         pathSelector();
         }
 
-          private void buildPaths() throws FileVersionException, IOException, ParseException{
+          private void buildPaths()throws FileVersionException, IOException, ParseException{
 
             PathConstraints constraints = new PathConstraints(2, 2, Units.degreesToRadians(360), Units.degreesToRadians(360));
 

@@ -26,9 +26,9 @@ public class Home_Elevator extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_Elevator.setElevatorSpeed(.1);
+   // m_Elevator.setElevatorSpeed(.1);
     new WaitCommand(.5);
-    m_Elevator.setElevatorSpeed(-.1);
+   // m_Elevator.setElevatorSpeed(-.1);
   }
 
   // Called once the command ends or is interrupted.
@@ -38,7 +38,8 @@ public class Home_Elevator extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    m_Elevator.setElevatorSpeed(0);
-    return m_Elevator.getBottomLimitSwitch();
+   // m_Elevator.setElevatorSpeed(0);
+   // return m_Elevator.getBottomLimitSwitch();
+   return true;
   }
 }

@@ -37,6 +37,7 @@ public class Set_Elevator_Height_Command extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return m_Elevator.getElevatorHeight() >= m_height+tolerance || m_Elevator.getElevatorHeight() <= m_height-tolerance;
+   // return m_Elevator.getElevatorHeight() >= m_height+tolerance || m_Elevator.getElevatorHeight() <= m_height-tolerance;
+   return true;
   }
 }
