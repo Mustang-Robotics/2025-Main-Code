@@ -89,7 +89,9 @@ public final class Constants {
 
   public static final class OIConstants {
     public static final int kDriverControllerPort = 0;
+    public static final int kSelectorControllerPort = 2;
     public static final double kDriveDeadband = 0.05;
+  
   }
 
   public static final class AutoConstants {
@@ -127,7 +129,7 @@ public final class Constants {
 
         // The layout of the AprilTags on the field
         public static final AprilTagFieldLayout kTagLayout =
-                AprilTagFieldLayout.loadField(AprilTagFields.kDefaultField);
+                AprilTagFieldLayout.loadField(AprilTagFields.k2025Reefscape);
         
 
         // The standard deviations of our vision estimated poses, which affect correction rate

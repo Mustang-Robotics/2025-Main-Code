@@ -44,11 +44,7 @@ public double SpeedAdjustment = 1;
 
   }
 
-  public void changeSetpoint(double setpoint) {
-    elevatorTarget = setpoint;
-  }
-
-  private void moveToSetpoint() {
+  public void moveToSetpoint(double elevatorTarget) {
     
     elevatorClosedLoopController.setReference(
         elevatorTarget, ControlType.kMAXMotionPositionControl, ClosedLoopSlot.kSlot0, 0.35);
