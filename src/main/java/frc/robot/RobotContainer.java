@@ -14,9 +14,11 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.OIConstants;
+import frc.robot.commands.Out_take;
 import frc.robot.subsystems.Climb;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.Intake;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
@@ -65,6 +67,7 @@ public class RobotContainer {
   public Command lpathCommand;
 
   public Command m_pathSelected = null;
+  public double m_ElevatorHeightSelectorCommand = 0;
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -95,6 +98,7 @@ public class RobotContainer {
           m_climb));
         buildPaths();
         pathSelector();
+        elevatorHeightCommand();
 
         m_driverController.a().onTrue(new InstantCommand(() -> m_pathSelected.schedule()));
         }
@@ -203,6 +207,24 @@ return m_pathSelected = lpathCommand;
 
  }
 
+ public double elevatorHeightCommand(){
+  if (m_operatorController.getPOV() == 0){
+   return m_ElevatorHeightSelectorCommand = 1 /*ElevatorHeights.kL1Height*/;
+  }else 
+  if (m_operatorController.getPOV() ==180) {
+    return m_ElevatorHeightSelectorCommand = 2 /*ElevatorHeights.kL2Height*/;
+  }else
+  if (m_operatorController.getPOV() == 90) {
+    return m_ElevatorHeightSelectorCommand = 3/*ElevatorHeight.kL3Height*/;
+  }else
+  if (m_operatorController.getPOV() == 270) {
+    return m_ElevatorHeightSelectorCommand = 4 /*ElevatorHeights.kL4Height*/;
+  }else {
+    return m_ElevatorHeightSelectorCommand = 0;
+  }
+  
+ }
+
          
 
   /**
@@ -222,7 +244,7 @@ return m_pathSelected = lpathCommand;
             m_robotDrive));
     
     //Operator Controller Configs
-     m_operatorController.pov(0)
+     /*m_operatorController.pov(0)
       .onTrue(new RunCommand(
       () -> m_elevator.changeSetpoint(ElevatorHeights.kL1Height)));
     m_operatorController.pov(180)
@@ -235,15 +257,26 @@ return m_pathSelected = lpathCommand;
       .whileTrue(new RunCommand(
       () -> m_elevator.changeSetpoint(ElevatorHeights.kL4Height)));
 
+      if (m_operatorController.getPOV() == 0){
+        new Runnable(()-> m_elevator.changeSetpoint(ElevatorHeights.kL1Height)) {
+          
+        };
+      }*/
 
-  
-
-
-
-  
-  }
-
-  /**
+      //Lets driver choose when to enable the preselected path and then at point Moves elevator up and then scores
+      m_driverController.a().onTrue(m_pathSelected.andThen(()-> m_elevator.moveToSetpoint(m_ElevatorHeightSelectorCommand)).andThen(new Out_take(new Intake())));
+      
+      
+        
+      
+      
+      
+        
+        }
+      
+      
+      
+        /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *
    * @return the command to run in autonomous

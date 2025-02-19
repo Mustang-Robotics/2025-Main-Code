@@ -36,7 +36,7 @@ public class Robot extends TimedRobot {
       try {
         m_robotContainer = new RobotContainer();
       } catch (FileVersionException | IOException | ParseException e) {
-        // TODO Auto-generated catch block
+
         e.printStackTrace();
       }
    
