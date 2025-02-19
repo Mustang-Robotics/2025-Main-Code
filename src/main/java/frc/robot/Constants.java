@@ -112,11 +112,11 @@ public final class Constants {
   }
 
   public static class ElevatorHeights {
-    public static final double kL1Height = 250;
+    public static final double kL1Height = 0;
     public static final double kL2Height = 1000;
-    public static final double kL3Height = 1500;
-    public static final double kL4Height = 2500;
-    public static final double kCorralStation = 250;
+    public static final double kL3Height = 1200;
+    public static final double kL4Height = 2900;
+    public static final double kCorralStation = 0;
   }
    public static class Vision {
         public static final String kCameraName = "Arducam_OV9281_USB_Camera";

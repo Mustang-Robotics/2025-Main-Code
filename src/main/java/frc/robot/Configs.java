@@ -4,6 +4,7 @@ import com.revrobotics.spark.config.EncoderConfig;
 import com.revrobotics.spark.config.SparkFlexConfig;
 import com.revrobotics.spark.config.SparkMaxConfig;
 import com.revrobotics.spark.config.ClosedLoopConfig.FeedbackSensor;
+import com.revrobotics.spark.config.LimitSwitchConfig.Type;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 
 import frc.robot.Constants.ModuleConstants;
@@ -56,13 +57,24 @@ public final class Configs {
         }
     }
 
+    public static final class Intake {
+        public static final SparkMaxConfig armConfig = new SparkMaxConfig();
+
+        static {
+                armConfig
+                .idleMode(IdleMode.kBrake)
+                .smartCurrentLimit(40)
+                .inverted(true);
+        }
+    }
+
     public static final class Elevator {
         public static final SparkMaxConfig elevatorConfig = new SparkMaxConfig();
 
         static {
                 elevatorConfig
-                .idleMode(IdleMode.kBrake)
-                .smartCurrentLimit(60)
+                .idleMode(IdleMode.kCoast)
+                .smartCurrentLimit(50)
                 .inverted(true)
                 .voltageCompensation(12);
 
@@ -71,13 +83,45 @@ public final class Configs {
                 .positionConversionFactor(100);
 
                 elevatorConfig
-                .closedLoop.feedbackSensor(FeedbackSensor.kPrimaryEncoder)
+                .limitSwitch
+                .reverseLimitSwitchEnabled(true)
+                .reverseLimitSwitchType(Type.kNormallyOpen);
+
+                elevatorConfig
+                .closedLoop
+                .feedbackSensor(FeedbackSensor.kPrimaryEncoder)
                 .p(.004)
+                .outputRange(-.7, .7)
+                .maxMotion
+                .maxVelocity(500000)
+                .maxAcceleration(500000)
+                .allowedClosedLoopError(10);
+
+        }
+    }
+    public static final class Arm {
+        public static final SparkMaxConfig armConfig = new SparkMaxConfig();
+
+        static {
+                armConfig
+                .idleMode(IdleMode.kCoast)
+                .smartCurrentLimit(50)
+                .inverted(true)
+                .voltageCompensation(12);
+
+                armConfig
+                .absoluteEncoder
+                .positionConversionFactor(360);
+
+                armConfig
+                .closedLoop
+                .feedbackSensor(FeedbackSensor.kAbsoluteEncoder)
+                .p(.001)
                 .outputRange(-.5, .5)
                 .maxMotion
-                .maxVelocity(10)
-                .maxAcceleration(10)
-                .allowedClosedLoopError(3);
+                .maxVelocity(100000)
+                .maxAcceleration(100000)
+                .allowedClosedLoopError(2);
 
         }
     }
