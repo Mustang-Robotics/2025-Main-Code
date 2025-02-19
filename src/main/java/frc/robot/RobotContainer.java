@@ -9,12 +9,18 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.OIConstants;
+import frc.robot.commands.CoralStation;
+import frc.robot.commands.L3;
+import frc.robot.commands.L4;
 import frc.robot.Constants.ElevatorHeights;
+import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Climb;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.Intake;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.StartEndCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import com.pathplanner.lib.auto.AutoBuilder;
@@ -31,6 +37,8 @@ public class RobotContainer {
   private final DriveSubsystem m_robotDrive = new DriveSubsystem();
   private final Elevator m_elevator = new Elevator();
   private final Climb m_climb = new Climb();
+  private final Arm m_arm = new Arm();
+  private final Intake m_intake = new Intake();
   // The driver's controller
   CommandXboxController m_driverController = new CommandXboxController(OIConstants.kDriverControllerPort);
   CommandXboxController m_operatorController = new CommandXboxController(1);
@@ -49,9 +57,9 @@ public class RobotContainer {
         // Turning is controlled by the X axis of the right stick.
         new RunCommand(
             () -> m_robotDrive.drive(
-                -MathUtil.applyDeadband(m_driverController.getLeftY(), OIConstants.kDriveDeadband),
-                -MathUtil.applyDeadband(m_driverController.getLeftX(), OIConstants.kDriveDeadband),
-                -MathUtil.applyDeadband(m_driverController.getRightX(), OIConstants.kDriveDeadband),
+                -MathUtil.applyDeadband(m_driverController.getLeftY()*m_elevator.SpeedAdjustment, OIConstants.kDriveDeadband),
+                -MathUtil.applyDeadband(m_driverController.getLeftX()*m_elevator.SpeedAdjustment, OIConstants.kDriveDeadband),
+                -MathUtil.applyDeadband(m_driverController.getRightX()*m_elevator.SpeedAdjustment, OIConstants.kDriveDeadband),
                 true),
             m_robotDrive));
         
@@ -77,21 +85,18 @@ public class RobotContainer {
         .whileTrue(new RunCommand(
             () -> m_robotDrive.setX(),
             m_robotDrive));
+    m_driverController.rightBumper()
+        .whileTrue(new StartEndCommand(
+          () -> m_intake.setIntakeSpeed(.2),
+          () -> m_intake.setIntakeSpeed(0)));
     
     //Operator Controller Configs
-    m_operatorController.pov(270)
-      .onTrue(new RunCommand(
-      () -> m_elevator.changeSetpoint(ElevatorHeights.kL1Height)));
-    m_operatorController.pov(180)
-      .onTrue(new RunCommand(
-      () -> m_elevator.changeSetpoint(ElevatorHeights.kL2Height)));
-    m_operatorController.pov(90)
-      .onTrue(new RunCommand(
-      () -> m_elevator.changeSetpoint(ElevatorHeights.kL3Height)));
     m_operatorController.pov(0)
-      .onTrue(new RunCommand(
-      () -> m_elevator.changeSetpoint(ElevatorHeights.kL4Height)));
-
+      .onTrue(new L4(m_elevator, m_arm));
+    m_operatorController.pov(270)
+      .onTrue(new CoralStation(m_elevator, m_arm));
+    m_operatorController.pov(90)
+      .onTrue(new L3(m_elevator, m_arm));
 
   
   }
