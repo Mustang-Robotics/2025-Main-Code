@@ -22,6 +22,7 @@ import com.pathplanner.lib.path.PathPlannerPath;
 import frc.robot.commands.L3;
 import frc.robot.commands.L4;
 import frc.robot.commands.CoralStation;
+import frc.robot.subsystems.Intake;
 
 /*
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -34,6 +35,7 @@ public class RobotContainer {
   private final DriveSubsystem m_robotDrive = new DriveSubsystem();
   private final Elevator m_elevator = new Elevator();
   private final Climb m_climb = new Climb();
+  private final Intake m_intake = new Intake();
   // The driver's controller
   CommandXboxController m_driverController = new CommandXboxController(OIConstants.kDriverControllerPort);
   CommandXboxController m_operatorController = new CommandXboxController(1);
@@ -82,7 +84,8 @@ public class RobotContainer {
             m_robotDrive));
     m_driverController.rightBumper()
         .whileTrue(new RunCommand(
-            () -> m_intake.
+            () -> m_intake.setIntakeSpeed(0.2),
+            m_intake));
     //Operator Controller Configs
     m_operatorController.pov(270)
       .onTrue(new CoralStation(m_elevator, m_arm));
