@@ -59,7 +59,7 @@ public class RobotContainer {
   private final Intake m_intake = new Intake();
   // The driver's controller
   CommandXboxController m_driverController = new CommandXboxController(OIConstants.kDriverControllerPort);
-  GenericHID m_operatorController = new GenericHID(OIConstants.kSelectorControllerPort);
+  CommandXboxController m_operatorController = new CommandXboxController(OIConstants.kSelectorControllerPort);
   private final SendableChooser<Command> m_chooser;  
 
   public Command apathCommand;
