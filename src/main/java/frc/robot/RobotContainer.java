@@ -80,7 +80,9 @@ public class RobotContainer {
         .whileTrue(new RunCommand(
             () -> m_robotDrive.setX(),
             m_robotDrive));
-    
+    m_driverController.rightBumper()
+        .whileTrue(new RunCommand(
+            () -> m_intake.
     //Operator Controller Configs
     m_operatorController.pov(270)
       .onTrue(new CoralStation(m_elevator, m_arm));
