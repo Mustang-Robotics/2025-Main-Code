@@ -10,11 +10,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.OIConstants;
 import frc.robot.Constants.ElevatorHeights;
+import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Climb;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.Elevator;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.StartEndCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import com.pathplanner.lib.auto.AutoBuilder;
@@ -37,6 +39,7 @@ public class RobotContainer {
   private final Elevator m_elevator = new Elevator();
   private final Climb m_climb = new Climb();
   private final Intake m_intake = new Intake();
+  private final Arm m_arm = new Arm();
   // The driver's controller
   CommandXboxController m_driverController = new CommandXboxController(OIConstants.kDriverControllerPort);
   CommandXboxController m_operatorController = new CommandXboxController(1);
@@ -84,8 +87,8 @@ public class RobotContainer {
             () -> m_robotDrive.setX(),
             m_robotDrive));
     m_driverController.rightBumper()
-        .whileTrue(new RunCommand(
-            () -> m_intake.setIntakeSpeed(0.2),
+        .whileTrue(new StartEndCommand(
+            () -> m_intake.setIntakeSpeed(0.2),() -> m_intake.setIntakeSpeed(0),
             m_intake));
     //Operator Controller Configs
     m_operatorController.pov(270)
