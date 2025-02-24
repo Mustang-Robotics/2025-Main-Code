@@ -9,6 +9,7 @@ import edu.wpi.first.math.util.Units;
 import edu.wpi.first.networktables.GenericEntry;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -37,6 +38,7 @@ import java.io.IOException;
 import org.json.simple.parser.ParseException;
 
 import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.commands.FollowPathCommand;
 import com.pathplanner.lib.path.PathConstraints;
 import com.pathplanner.lib.path.PathPlannerPath;
 import com.pathplanner.lib.util.FileVersionException;
@@ -57,6 +59,20 @@ public class RobotContainer {
   private final Climb m_climb = new Climb();
   private final Arm m_arm = new Arm();
   private final Intake m_intake = new Intake();
+
+  public Command pathACommand;
+  public Command pathBCommand;
+  public Command pathCCommand;
+  public Command pathDCommand;
+  public Command pathECommand;
+  public Command pathFCommand;
+  public Command pathGCommand;
+  public Command pathHCommand;
+  public Command pathICommand;
+  public Command pathJCommand;
+  public Command pathKCommand;
+  public Command pathLCommand;
+
   // The driver's controller
   CommandXboxController m_driverController = new CommandXboxController(OIConstants.kDriverControllerPort);
   CommandXboxController m_operatorController = new CommandXboxController(OIConstants.kSelectorControllerPort);
@@ -86,7 +102,72 @@ public class RobotContainer {
             () -> m_climb.setClimbSpeed(m_driverController.getRightTriggerAxis()-m_driverController.getLeftTriggerAxis()),
           m_climb));
              
+     }
+GenericEntry selectedPath = Shuffleboard.getTab("Auto").add("Selected Path", "").withWidget(BuiltInWidgets.kTextView).getEntry();
+Command m_selectedPath;
 
+PathConstraints constraints = new PathConstraints(2, 2, Units.degreesToRadians(360), Units.degreesToRadians(360));
+
+public void buildpaths() throws FileVersionException, IOException, ParseException{
+  PathPlannerPath A = PathPlannerPath.fromPathFile("A");
+  PathPlannerPath B = PathPlannerPath.fromPathFile("B");
+  PathPlannerPath C = PathPlannerPath.fromPathFile("C");
+  PathPlannerPath D = PathPlannerPath.fromPathFile("D");
+  PathPlannerPath E = PathPlannerPath.fromPathFile("E");
+  PathPlannerPath F = PathPlannerPath.fromPathFile("F");
+  PathPlannerPath G = PathPlannerPath.fromPathFile("G");
+  PathPlannerPath H = PathPlannerPath.fromPathFile("H");
+  PathPlannerPath I = PathPlannerPath.fromPathFile("I");
+  PathPlannerPath J = PathPlannerPath.fromPathFile("J");
+  PathPlannerPath K = PathPlannerPath.fromPathFile("K");
+  PathPlannerPath L = PathPlannerPath.fromPathFile("L");
+
+ /* pathACommand = FollowPathCommand.buildPathCommand(A);
+  pathBCommand = FollowPathCommand.buildPathCommand(B);
+  pathCCommand = FollowPathCommand.buildPathCommand(C);
+  pathDCommand = FollowPathCommand.buildPathCommand(D);
+  pathECommand = FollowPathCommand.buildPathCommand(E);
+  pathFCommand = FollowPathCommand.buildPathCommand(F);
+  pathGCommand = FollowPathCommand.buildPathCommand(G);
+  pathHCommand = FollowPathCommand.buildPathCommand(H);
+  pathICommand = FollowPathCommand.buildPathCommand(I);
+  pathJCommand = FollowPathCommand.buildPathCommand(J);
+  pathKCommand = FollowPathCommand.buildPathCommand(K);
+  pathLCommand = FollowPathCommand.buildPathCommand(L);*/
+}
+
+public Command selectpath() {
+if ( m_operatorController.a().getAsBoolean()) {
+  return m_selectedPath = pathACommand;
+} else if (m_operatorController.a().getAsBoolean()){
+  return m_selectedPath = pathBCommand;
+} else if ( m_operatorController.a().getAsBoolean()){
+  return m_selectedPath = pathCCommand;
+} else if (m_operatorController.a().getAsBoolean()) {
+  return m_selectedPath = pathDCommand;
+} else if (m_operatorController.a().getAsBoolean()){
+  return m_selectedPath = pathECommand;
+} else if (m_operatorController.a().getAsBoolean()){
+  return m_selectedPath = pathFCommand;
+} else if (m_operatorController.a().getAsBoolean()){
+  return m_selectedPath = pathGCommand;
+} else if (m_operatorController.a().getAsBoolean()){
+  return m_selectedPath = pathHCommand;
+} else if (m_operatorController.a().getAsBoolean()){
+  return m_selectedPath = pathICommand;
+} else if (m_operatorController.a().getAsBoolean()){
+  return m_selectedPath = pathJCommand;
+} else if (m_operatorController.a().getAsBoolean()){
+  return m_selectedPath = pathKCommand;
+} else if (m_operatorController.a().getAsBoolean()){
+  return m_selectedPath = pathLCommand;
+} else {
+  return m_selectedPath = null;
+}
+if (Alliance.Red.equals("Red")){
+  A.flipPath();
+}
+}
   /**
    * Use this method to define your button->command mappings. Buttons can be
    * created by

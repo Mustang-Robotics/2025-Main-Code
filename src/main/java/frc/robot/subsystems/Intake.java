@@ -30,5 +30,8 @@ public class Intake extends SubsystemBase {
   public void setIntakeSpeed(double speed) {
     m_intake.set(speed);
   }
+  public double getIntakeCurrent() {
+    return m_intake.getOutputCurrent();
+  }
  
 }

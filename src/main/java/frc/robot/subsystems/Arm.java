@@ -47,4 +47,4 @@ public class Arm extends SubsystemBase {
     moveToSetpoint();
   }
 }
-}
+
