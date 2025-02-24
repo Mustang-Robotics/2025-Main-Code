@@ -27,7 +27,6 @@ import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Intake;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.StartEndCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -108,7 +107,8 @@ Command m_selectedPath;
 
 PathConstraints constraints = new PathConstraints(2, 2, Units.degreesToRadians(360), Units.degreesToRadians(360));
 
-public void buildpaths() throws FileVersionException, IOException, ParseException{
+public void buildpaths() {
+    try {
   PathPlannerPath A = PathPlannerPath.fromPathFile("A");
   PathPlannerPath B = PathPlannerPath.fromPathFile("B");
   PathPlannerPath C = PathPlannerPath.fromPathFile("C");
@@ -121,19 +121,25 @@ public void buildpaths() throws FileVersionException, IOException, ParseExceptio
   PathPlannerPath J = PathPlannerPath.fromPathFile("J");
   PathPlannerPath K = PathPlannerPath.fromPathFile("K");
   PathPlannerPath L = PathPlannerPath.fromPathFile("L");
+    } catch (FileVersionException | IOException | ParseException e) {
+    
+      e.printStackTrace();
+    }
 
- /* pathACommand = FollowPathCommand.buildPathCommand(A);
-  pathBCommand = FollowPathCommand.buildPathCommand(B);
-  pathCCommand = FollowPathCommand.buildPathCommand(C);
-  pathDCommand = FollowPathCommand.buildPathCommand(D);
-  pathECommand = FollowPathCommand.buildPathCommand(E);
-  pathFCommand = FollowPathCommand.buildPathCommand(F);
-  pathGCommand = FollowPathCommand.buildPathCommand(G);
-  pathHCommand = FollowPathCommand.buildPathCommand(H);
-  pathICommand = FollowPathCommand.buildPathCommand(I);
-  pathJCommand = FollowPathCommand.buildPathCommand(J);
-  pathKCommand = FollowPathCommand.buildPathCommand(K);
-  pathLCommand = FollowPathCommand.buildPathCommand(L);*/
+    pathACommand = AutoBuilder.buildAuto("A");
+    pathBCommand = AutoBuilder.buildAuto("B");
+    pathCCommand = AutoBuilder.buildAuto("C");
+    pathDCommand = AutoBuilder.buildAuto("D");
+    pathECommand = AutoBuilder.buildAuto("E");
+    pathFCommand = AutoBuilder.buildAuto("F");
+    pathGCommand = AutoBuilder.buildAuto("G");
+    pathHCommand = AutoBuilder.buildAuto("H");
+    pathICommand = AutoBuilder.buildAuto("I");
+    pathJCommand = AutoBuilder.buildAuto("J");
+    pathKCommand = AutoBuilder.buildAuto("K");
+    pathLCommand = AutoBuilder.buildAuto("L");
+  
+ 
 }
 
 public Command selectpath() {
@@ -163,9 +169,6 @@ if ( m_operatorController.a().getAsBoolean()) {
   return m_selectedPath = pathLCommand;
 } else {
   return m_selectedPath = null;
-}
-if (Alliance.Red.equals("Red")){
-  A.flipPath();
 }
 }
   /**

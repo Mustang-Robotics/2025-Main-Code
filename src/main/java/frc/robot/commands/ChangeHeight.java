@@ -16,7 +16,7 @@ public class ChangeHeight extends Command {
 
     @Override
     public void initialize() {
-        m_elevator.changeSetpoint(m_setpoint);
+        //m_elevator.changeSetpoint(m_setpoint);
     }
 
     @Override

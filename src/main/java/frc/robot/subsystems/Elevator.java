@@ -65,7 +65,7 @@ public double SpeedAdjustment = 1;
 
   @Override
   public void periodic() {
-    moveToSetpoint();
+   // moveToSetpoint();
     zeroElevatorLimit();
     ElevatorSpeedAdjustment();
   }
