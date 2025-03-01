@@ -17,7 +17,7 @@ public class Arm extends SubsystemBase {
   private final SparkMax m_arm = new SparkMax(9, MotorType.kBrushless);
   private SparkClosedLoopController armClosedLoopController = m_arm.getClosedLoopController();
   public final AbsoluteEncoder armEncoder = m_arm.getAbsoluteEncoder();
-  public double armTarget = 50;
+  public double armTarget = 30;
 
   //Creates a feedforward controller for the arm & a PID controller for the arm
   //private ArmFeedforward armFeedforward = new ArmFeedforward(0, 0, 0, 0);

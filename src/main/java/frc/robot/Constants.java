@@ -111,19 +111,24 @@ public final class Constants {
     public static final double kFreeSpeedRpm = 6784;
   }
 
-  public static class ElevatorHeights {
+  public static class ElevatorConstants {
     public static final double kL1Height = 0;
-    public static final double kL2Height = 200;
+    public static final double kL2Height = 225;
     public static final double kL3Height = 1200;
     public static final double kL4Height = 2900;
     public static final double kCorralStation = 0;
+    public static final double kArmTravel = 55;
+    public static final double kL4Arm = 73;
+    public static final double kL2_3Arm = 83;
+    public static final double kCorralStationArm = 20;
   }
+
    public static class Vision {
         public static final String kCameraName = "Arducam_OV9281_USB_Camera";
         //public static final String objectCamera = "USB_Camera";
         // Cam mounted facing forward, half a meter forward of center, half a meter up from center.
         public static final Transform3d kRobotToCam =
-                new Transform3d(new Translation3d(-0.34, 0.0, 0.135), new Rotation3d(0, 0, 0));
+                new Transform3d(new Translation3d(0.1778, -0.2794, 0.3112), new Rotation3d(0, 0, 0));
 
         // The layout of the AprilTags on the field
         public static final AprilTagFieldLayout kTagLayout =
@@ -132,8 +137,8 @@ public final class Constants {
 
         // The standard deviations of our vision estimated poses, which affect correction rate
         // (Fake values. Experiment and determine estimation noise on an actual robot.)
-        public static final Matrix<N3, N1> kSingleTagStdDevs = VecBuilder.fill(1, 1, 10);
-        public static final Matrix<N3, N1> kMultiTagStdDevs = VecBuilder.fill(.5, .5, 1);
+        public static final Matrix<N3, N1> kSingleTagStdDevs = VecBuilder.fill(.5, .5, 2);
+        public static final Matrix<N3, N1> kMultiTagStdDevs = VecBuilder.fill(.25, .25, .5);
     }
     public class AutoConfig {
       public static RobotConfig config;

@@ -20,7 +20,7 @@ public class Intake extends SubsystemBase {
   public Intake() {
 
     m_intake.configure(
-      Configs.Arm.armConfig,
+      Configs.Intake.intakeConfig,
       ResetMode.kResetSafeParameters,
       PersistMode.kPersistParameters);
 
@@ -29,6 +29,10 @@ public class Intake extends SubsystemBase {
   //Sets the intake speed
   public void setIntakeSpeed(double speed) {
     m_intake.set(speed);
+  }
+
+  public double getIntakeCurrent() {
+    return m_intake.getOutputCurrent();
   }
  
 }

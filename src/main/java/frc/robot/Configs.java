@@ -1,6 +1,5 @@
 package frc.robot;
 
-import com.revrobotics.spark.config.EncoderConfig;
 import com.revrobotics.spark.config.SparkFlexConfig;
 import com.revrobotics.spark.config.SparkMaxConfig;
 import com.revrobotics.spark.config.ClosedLoopConfig.FeedbackSensor;
@@ -58,12 +57,12 @@ public final class Configs {
     }
 
     public static final class Intake {
-        public static final SparkMaxConfig armConfig = new SparkMaxConfig();
+        public static final SparkMaxConfig intakeConfig = new SparkMaxConfig();
 
         static {
-                armConfig
+                intakeConfig
                 .idleMode(IdleMode.kBrake)
-                .smartCurrentLimit(40)
+                .smartCurrentLimit(60)
                 .inverted(true);
         }
     }
@@ -80,7 +79,8 @@ public final class Configs {
 
                 elevatorConfig
                 .encoder
-                .positionConversionFactor(100);
+                .positionConversionFactor(100)
+                .velocityConversionFactor(100);
 
                 elevatorConfig
                 .limitSwitch
@@ -90,8 +90,8 @@ public final class Configs {
                 elevatorConfig
                 .closedLoop
                 .feedbackSensor(FeedbackSensor.kPrimaryEncoder)
-                .p(.004)
-                .outputRange(-.7, .7)
+                .p(.0035)
+                .outputRange(-1, 1)
                 .maxMotion
                 .maxVelocity(500000)
                 .maxAcceleration(500000)
@@ -111,16 +111,17 @@ public final class Configs {
 
                 armConfig
                 .absoluteEncoder
-                .positionConversionFactor(360);
+                .positionConversionFactor(360)
+                .velocityConversionFactor(360);
 
                 armConfig
                 .closedLoop
                 .feedbackSensor(FeedbackSensor.kAbsoluteEncoder)
-                .p(.001)
+                .p(.0005)
                 .outputRange(-.5, .5)
                 .maxMotion
-                .maxVelocity(100000)
-                .maxAcceleration(100000)
+                .maxVelocity(1000000)
+                .maxAcceleration(500000)
                 .allowedClosedLoopError(2);
 
         }
