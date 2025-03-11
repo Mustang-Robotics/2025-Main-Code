@@ -47,8 +47,13 @@
   "reversed": false,
   "folder": null,
   "idealStartingState": {
+<<<<<<< HEAD
     "velocity": 0,
     "rotation": -59.0324046117832
+=======
+    "velocity": 0.5,
+    "rotation": -61.355817101017315
+>>>>>>> a2f230b (Basically Done)
   },
   "useDefaultConstraints": true
 }

@@ -16,12 +16,21 @@
     },
     {
       "anchor": {
+<<<<<<< HEAD
         "x": 3.978590351980328,
         "y": 2.800779300224889
       },
       "prevControl": {
         "x": 4.010295197643219,
         "y": 3.048760756712047
+=======
+        "x": 4.017862353646936,
+        "y": 2.7857632102217385
+      },
+      "prevControl": {
+        "x": 3.8634888546380335,
+        "y": 2.5639579370635786
+>>>>>>> a2f230b (Basically Done)
       },
       "nextControl": null,
       "isLocked": false,
@@ -47,8 +56,13 @@
   "reversed": false,
   "folder": null,
   "idealStartingState": {
+<<<<<<< HEAD
     "velocity": 0,
     "rotation": 59.604241719850585
+=======
+    "velocity": 0.5,
+    "rotation": 59.46045847564415
+>>>>>>> a2f230b (Basically Done)
   },
   "useDefaultConstraints": true
 }

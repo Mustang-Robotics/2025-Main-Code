@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+
+
 import com.pathplanner.lib.config.RobotConfig;
 
 import edu.wpi.first.apriltag.AprilTagFieldLayout;
@@ -115,17 +117,33 @@ public final class Constants {
 
   public static class ElevatorHeights {
     public static final double kL1Height = 0;
+<<<<<<< HEAD
     public static final double kL2Height = 1000;
     public static final double kL3Height = 1200;
     public static final double kL4Height = 2900;
     public static final double kCorralStation = 0;
+=======
+    public static final double kL2Height = 200;
+    public static final double kL3Height = 1200;
+    public static final double kL4Height = 2900;
+    public static final double kCorralStation = 40;
+    public static final double kArmTravel = 55;
+    public static final double kL4Arm = 73;
+    public static final double kL2_3Arm = 83;
+    public static final double kCorralStationArm = 10;
+    public static final double kAlgae = 100;
+>>>>>>> a2f230b (Basically Done)
   }
    public static class Vision {
         public static final String kCameraName = "Arducam_OV9281_USB_Camera";
         //public static final String objectCamera = "USB_Camera";
         // Cam mounted facing forward, half a meter forward of center, half a meter up from center.
         public static final Transform3d kRobotToCam =
+<<<<<<< HEAD
                 new Transform3d(new Translation3d(-0.34, 0.0, 0.135), new Rotation3d(0, 0, 0));
+=======
+                new Transform3d(new Translation3d(0.1778, -0.2794, 0.3112), new Rotation3d(0, 0, .175));
+>>>>>>> a2f230b (Basically Done)
 
         // The layout of the AprilTags on the field
         public static final AprilTagFieldLayout kTagLayout =

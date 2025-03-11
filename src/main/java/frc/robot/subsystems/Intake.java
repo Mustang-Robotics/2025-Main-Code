@@ -5,9 +5,11 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.spark.SparkLowLevel.MotorType;
+
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
+
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Configs;
@@ -16,7 +18,6 @@ public class Intake extends SubsystemBase {
   /** Creates a new Intake. */
 
   private final SparkMax m_intake = new SparkMax(6, MotorType.kBrushless);
-  
   public Intake() {
 
     m_intake.configure(
@@ -33,5 +34,6 @@ public class Intake extends SubsystemBase {
   public double getIntakeCurrent() {
     return m_intake.getOutputCurrent();
   }
+
  
 }

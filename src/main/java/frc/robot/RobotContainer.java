@@ -44,6 +44,17 @@ import com.pathplanner.lib.util.FileVersionException;
 
 
 
+<<<<<<< HEAD
+=======
+import frc.robot.commands.L3;
+import frc.robot.commands.L4;
+import frc.robot.commands.RemoveAlgae;
+import frc.robot.commands.L2;
+import frc.robot.commands.CoralStation;
+import frc.robot.commands.FollowThenScore;
+import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.LED;
+>>>>>>> a2f230b (Basically Done)
 
 /*
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -56,6 +67,7 @@ public class RobotContainer {
   private final DriveSubsystem m_robotDrive = new DriveSubsystem();
   private final Elevator m_elevator = new Elevator();
   private final Climb m_climb = new Climb();
+<<<<<<< HEAD
   private final Arm m_arm = new Arm();
   private final Intake m_intake = new Intake();
 
@@ -78,10 +90,47 @@ public class RobotContainer {
   private final SendableChooser<Command> m_chooser;  
 
    // The container for the robot. Contains subsystems, OI devices, and commands.
+=======
+  public final Intake m_intake = new Intake();
+  private final Arm m_arm = new Arm();
+  private final LED m_led = new LED();
+  // The driver's controller
+  CommandXboxController m_driverController = new CommandXboxController(OIConstants.kDriverControllerPort);
+  CommandXboxController m_operatorController = new CommandXboxController(1);
+  private final SendableChooser<Command> m_chooser;
+  private Command ApathCommand;
+  private Command BpathCommand;
+  private Command CpathCommand;
+  private Command DpathCommand;
+  private Command EpathCommand;
+  private Command FpathCommand;
+  private Command GpathCommand;
+  private Command HpathCommand;
+  private Command IpathCommand;
+  private Command JpathCommand;
+  private Command KpathCommand;
+  private Command LpathCommand;
+  private PathPlannerPath A_path;
+  private PathPlannerPath B_path;
+  private PathPlannerPath C_path;
+  private PathPlannerPath D_path;
+  private PathPlannerPath E_path;
+  private PathPlannerPath F_path;
+  private PathPlannerPath G_path;
+  private PathPlannerPath H_path;
+  private PathPlannerPath I_path;
+  private PathPlannerPath J_path;
+  private PathPlannerPath K_path;
+  private PathPlannerPath L_path;
+  
+  /**
+   * The container for the robot. Contains subsystems, OI devices, and commands.
+>>>>>>> a2f230b (Basically Done)
       
      public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
+    m_led.SolidGreen();
     m_chooser = AutoBuilder.buildAutoChooser();
     SmartDashboard.putData("Auto Chooser", m_chooser);
     // Configure default commands
@@ -186,6 +235,7 @@ if ( m_operatorController.a().getAsBoolean()) {
         .whileTrue(new RunCommand(
             () -> m_robotDrive.setX(),
             m_robotDrive));
+<<<<<<< HEAD
     m_driverController.rightBumper()
         .whileTrue(new StartEndCommand(
           () -> m_intake.setIntakeSpeed(.2),
@@ -196,6 +246,44 @@ if ( m_operatorController.a().getAsBoolean()) {
       .onTrue(new L4(m_elevator, m_arm));
     m_operatorController.pov(270)
       .onTrue(new CoralStation(m_elevator, m_arm));
+=======
+    m_driverController.b()
+        .whileTrue(new StartEndCommand(() -> m_intake.setIntakeSpeed(.2), () -> m_intake.setIntakeSpeed(0), m_intake));
+    //Operator Controller Configs
+    m_driverController.pov(270)
+      .onTrue(new CoralStation(m_elevator, m_arm, m_intake, m_led));
+    m_driverController.pov(90)
+      .onTrue(new L2(m_elevator, m_arm));
+    m_driverController.leftBumper()
+      .onTrue(new L3(m_elevator, m_arm));
+    m_driverController.rightBumper()
+      .onTrue(new L4(m_elevator, m_arm));
+
+    m_operatorController.pov(270)
+    .onTrue(new RemoveAlgae(m_robotDrive, m_arm, m_intake));
+    m_operatorController.pov(180)
+    .onTrue(new L2(m_elevator, m_arm));
+    m_operatorController.pov(90)
+    .onTrue(new L3(m_elevator, m_arm));
+    m_operatorController.pov(0)
+    .onTrue(new L4(m_elevator, m_arm));
+
+    m_operatorController.rightTrigger(.9).toggleOnTrue(new FollowThenScore(ApathCommand, m_intake, m_led));
+    m_operatorController.x().toggleOnTrue(new FollowThenScore(BpathCommand, m_intake, m_led));
+    m_operatorController.a().toggleOnTrue(new FollowThenScore(CpathCommand, m_intake, m_led));
+    m_operatorController.b().toggleOnTrue(new FollowThenScore(DpathCommand, m_intake, m_led));
+    m_operatorController.y().toggleOnTrue(new FollowThenScore(EpathCommand, m_intake, m_led));
+    m_operatorController.rightBumper().toggleOnTrue(new FollowThenScore(FpathCommand, m_intake, m_led));
+    m_operatorController.start().toggleOnTrue(new FollowThenScore(GpathCommand, m_intake, m_led));
+    m_operatorController.back().toggleOnTrue(new FollowThenScore(HpathCommand, m_intake, m_led));
+    m_operatorController.leftBumper().toggleOnTrue(new FollowThenScore(IpathCommand, m_intake, m_led));
+    m_operatorController.leftStick().toggleOnTrue(new FollowThenScore(JpathCommand, m_intake, m_led));
+    m_operatorController.leftTrigger(.9).toggleOnTrue(new FollowThenScore(KpathCommand, m_intake, m_led));
+    m_operatorController.rightStick().toggleOnTrue(new FollowThenScore(LpathCommand, m_intake, m_led));
+
+
+  
+>>>>>>> a2f230b (Basically Done)
   }
    /* Use this to pass the autonomous command to the main {@link Robot} class.
    *
