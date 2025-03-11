@@ -31,11 +31,12 @@ import com.pathplanner.lib.path.PathPlannerPath;
 
 import frc.robot.commands.L3;
 import frc.robot.commands.L4;
-import frc.robot.commands.IntakeSpeed;
+import frc.robot.commands.RemoveAlgae;
 import frc.robot.commands.L2;
 import frc.robot.commands.CoralStation;
-import frc.robot.commands.GripCoral;
+import frc.robot.commands.FollowThenScore;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.LED;
 
 /*
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -48,14 +49,13 @@ public class RobotContainer {
   private final DriveSubsystem m_robotDrive = new DriveSubsystem();
   private final Elevator m_elevator = new Elevator();
   private final Climb m_climb = new Climb();
-  private final Intake m_intake = new Intake();
+  public final Intake m_intake = new Intake();
   private final Arm m_arm = new Arm();
+  private final LED m_led = new LED();
   // The driver's controller
   CommandXboxController m_driverController = new CommandXboxController(OIConstants.kDriverControllerPort);
   CommandXboxController m_operatorController = new CommandXboxController(1);
   private final SendableChooser<Command> m_chooser;
-  private IntakeSpeed intake = new IntakeSpeed(m_intake, .2);
-  private IntakeSpeed intakeOff = new IntakeSpeed(m_intake, 0);
   private Command ApathCommand;
   private Command BpathCommand;
   private Command CpathCommand;
@@ -89,6 +89,7 @@ public class RobotContainer {
     // Configure the button bindings
     buildPathCommands();
     configureButtonBindings();
+    m_led.SolidGreen();
     m_chooser = AutoBuilder.buildAutoChooser();
     SmartDashboard.putData("Auto Chooser", m_chooser);
     // Configure default commands
@@ -130,7 +131,7 @@ public class RobotContainer {
         .whileTrue(new StartEndCommand(() -> m_intake.setIntakeSpeed(.2), () -> m_intake.setIntakeSpeed(0), m_intake));
     //Operator Controller Configs
     m_driverController.pov(270)
-      .onTrue(new CoralStation(m_elevator, m_arm));
+      .onTrue(new CoralStation(m_elevator, m_arm, m_intake, m_led));
     m_driverController.pov(90)
       .onTrue(new L2(m_elevator, m_arm));
     m_driverController.leftBumper()
@@ -139,7 +140,7 @@ public class RobotContainer {
       .onTrue(new L4(m_elevator, m_arm));
 
     m_operatorController.pov(270)
-    .onTrue(new GripCoral(m_intake, m_arm));
+    .onTrue(new RemoveAlgae(m_robotDrive, m_arm, m_intake));
     m_operatorController.pov(180)
     .onTrue(new L2(m_elevator, m_arm));
     m_operatorController.pov(90)
@@ -147,18 +148,18 @@ public class RobotContainer {
     m_operatorController.pov(0)
     .onTrue(new L4(m_elevator, m_arm));
 
-    m_operatorController.rightTrigger(.9).toggleOnTrue(ApathCommand);
-    m_operatorController.x().toggleOnTrue(BpathCommand);
-    m_operatorController.a().toggleOnTrue(CpathCommand);
-    m_operatorController.b().toggleOnTrue(DpathCommand);
-    m_operatorController.y().toggleOnTrue(EpathCommand);
-    m_operatorController.rightBumper().toggleOnTrue(FpathCommand);
-    m_operatorController.start().toggleOnTrue(GpathCommand);
-    m_operatorController.back().toggleOnTrue(HpathCommand);
-    m_operatorController.leftBumper().toggleOnTrue(IpathCommand);
-    m_operatorController.leftStick().toggleOnTrue(JpathCommand);
-    m_operatorController.leftTrigger(.9).toggleOnTrue(KpathCommand);
-    m_operatorController.rightStick().toggleOnTrue(LpathCommand);
+    m_operatorController.rightTrigger(.9).toggleOnTrue(new FollowThenScore(ApathCommand, m_intake, m_led));
+    m_operatorController.x().toggleOnTrue(new FollowThenScore(BpathCommand, m_intake, m_led));
+    m_operatorController.a().toggleOnTrue(new FollowThenScore(CpathCommand, m_intake, m_led));
+    m_operatorController.b().toggleOnTrue(new FollowThenScore(DpathCommand, m_intake, m_led));
+    m_operatorController.y().toggleOnTrue(new FollowThenScore(EpathCommand, m_intake, m_led));
+    m_operatorController.rightBumper().toggleOnTrue(new FollowThenScore(FpathCommand, m_intake, m_led));
+    m_operatorController.start().toggleOnTrue(new FollowThenScore(GpathCommand, m_intake, m_led));
+    m_operatorController.back().toggleOnTrue(new FollowThenScore(HpathCommand, m_intake, m_led));
+    m_operatorController.leftBumper().toggleOnTrue(new FollowThenScore(IpathCommand, m_intake, m_led));
+    m_operatorController.leftStick().toggleOnTrue(new FollowThenScore(JpathCommand, m_intake, m_led));
+    m_operatorController.leftTrigger(.9).toggleOnTrue(new FollowThenScore(KpathCommand, m_intake, m_led));
+    m_operatorController.rightStick().toggleOnTrue(new FollowThenScore(LpathCommand, m_intake, m_led));
 
 
   

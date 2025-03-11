@@ -7,7 +7,7 @@ import frc.robot.Constants.ElevatorConstants;
 
 
 public class L2 extends SequentialCommandGroup {
-    public L2(Elevator elevator, Arm arm) {
+    public L2(Elevator elevator, Arm arm){
         addCommands(
             new ChangeAngle(arm, ElevatorConstants.kArmTravel),
             new ChangeHeight(elevator, ElevatorConstants.kL2Height),
