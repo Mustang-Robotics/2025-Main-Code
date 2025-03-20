@@ -3,17 +3,15 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 
 import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.LED;
 
 public class IntakeCurrentStop extends Command {
     private final Intake m_intake;
     private final double m_speed;
-    private final LED m_led;
 
 
-    public IntakeCurrentStop(Intake intake, LED led, double speed) {
+
+    public IntakeCurrentStop(Intake intake, double speed) {
         m_intake = intake;
-        m_led = led;
         m_speed = speed;
         addRequirements(m_intake);
     }

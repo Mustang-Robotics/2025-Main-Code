@@ -77,7 +77,7 @@ public class DriveSubsystem extends SubsystemBase {
     this::getRobotRelativeSpeeds, // ChassisSpeeds supplier. MUST BE ROBOT RELATIVE
     (speeds, feedforwards) -> driveRobotRelative(speeds), // Method that will drive the robot given ROBOT RELATIVE ChassisSpeeds
     new PPHolonomicDriveController( // HolonomicPathFollowerConfig, this should likely live in your Constants class
-        new PIDConstants(2.5, 0.0, 0.0), // Translation PID constants
+        new PIDConstants(5, 0.0, 0.0), // Translation PID constants
         new PIDConstants(5, 0, 0.0) // Rotation PID constants
     ),
     AutoConfig.config,
@@ -97,6 +97,9 @@ public class DriveSubsystem extends SubsystemBase {
     // Update the odometry in the periodic block
     SmartDashboard.putNumber("angle", m_gyro.getAngle(IMUAxis.kZ));
     m_pose.setRobotPose(m_odometry.getEstimatedPosition());
+    SmartDashboard.putNumber("X", m_pose.getRobotPose().getMeasureX().baseUnitMagnitude());
+    SmartDashboard.putNumber("Y", m_pose.getRobotPose().getMeasureY().baseUnitMagnitude());
+    SmartDashboard.putNumber("Rotation", m_pose.getRobotPose().getRotation().getDegrees());
     SmartDashboard.putData("pose", m_pose);
     m_odometry.update(
         Rotation2d.fromDegrees(m_gyro.getAngle(IMUAxis.kZ)),
@@ -106,8 +109,15 @@ public class DriveSubsystem extends SubsystemBase {
             m_rearLeft.getPosition(),
             m_rearRight.getPosition()
         });
-    var visionEst = vision.getEstimatedGlobalPose();
-    visionEst.ifPresent(
+    var visionBottomEst = vision.getBottomEstimatedGlobalPose();
+    visionBottomEst.ifPresent(
+      est -> {
+        var estStdDevs = vision.getEstimationStdDevs();
+        m_odometry.addVisionMeasurement(est.estimatedPose.toPose2d(), est.timestampSeconds, estStdDevs);
+    });
+
+    var visionTopEst = vision.getTopEstimatedGlobalPose();
+    visionTopEst.ifPresent(
       est -> {
         var estStdDevs = vision.getEstimationStdDevs();
         m_odometry.addVisionMeasurement(est.estimatedPose.toPose2d(), est.timestampSeconds, estStdDevs);

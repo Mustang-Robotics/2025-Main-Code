@@ -25,7 +25,6 @@ private final SparkMax m_elevator = new SparkMax(7, MotorType.kBrushless);
 private SparkClosedLoopController elevatorClosedLoopController = m_elevator.getClosedLoopController();
 public RelativeEncoder elevatorEncoder = m_elevator.getEncoder();
 private double elevatorTarget = 0;
-private boolean limitReset = false;
 public double SpeedAdjustment = 1;
 
 
@@ -54,14 +53,6 @@ public double SpeedAdjustment = 1;
         elevatorTarget, ControlType.kMAXMotionPositionControl, ClosedLoopSlot.kSlot0, 0.35);
   }
 
-  private void zeroElevatorLimit() {
-    if(!limitReset && m_elevator.getReverseLimitSwitch().isPressed()) {
-      elevatorEncoder.setPosition(0);
-      limitReset = true;
-    }else if (!m_elevator.getReverseLimitSwitch().isPressed()) {
-      limitReset = false;
-    }
-  }
 
   private void ElevatorSpeedAdjustment() {
     SpeedAdjustment = 1 - (elevatorEncoder.getPosition()/5000);
@@ -70,7 +61,6 @@ public double SpeedAdjustment = 1;
   @Override
   public void periodic() {
     moveToSetpoint();
-    zeroElevatorLimit();
     ElevatorSpeedAdjustment();
   }
 }

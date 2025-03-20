@@ -9,10 +9,11 @@ import frc.robot.subsystems.LED;
 import frc.robot.Constants.ElevatorConstants;
 
 
-public class CoralStation extends SequentialCommandGroup {
-    public CoralStation(Elevator elevator, Arm arm, Intake intake, LED led) {
+public class AutoCoralStation extends SequentialCommandGroup {
+    public AutoCoralStation(Elevator elevator, Arm arm, Intake intake, LED led) {
         addCommands(
-            new LEDSolidBlue(led),
+            new WaitCommand(0.5),
+            new LEDSolidRed(led),
             new ChangeAngle(arm, ElevatorConstants.kArmTravel),
             new ChangeHeight(elevator, ElevatorConstants.kCorralStation),
             new ChangeAngle(arm, ElevatorConstants.kCorralStationArm),

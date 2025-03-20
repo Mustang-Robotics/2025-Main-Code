@@ -115,24 +115,26 @@ public final class Constants {
 
   public static class ElevatorConstants {
     public static final double kL1Height = 0;
-    public static final double kL2Height = 200;
-    public static final double kL3Height = 1200;
+    public static final double kL2Height = 400;
+    public static final double kL3Height = 1350;
     public static final double kL4Height = 2900;
     public static final double kCorralStation = 40;
     public static final double kArmTravel = 55;
-    public static final double kL4Arm = 73;
+    public static final double kL4Arm = 78;
     public static final double kL2_3Arm = 83;
     public static final double kCorralStationArm = 10;
     public static final double kAlgae = 100;
   }
 
    public static class Vision {
-        public static final String kCameraName = "Arducam_OV9281_USB_Camera";
+        public static final String kBottomCamera = "Bottom";
+        public static final String kTopCamera = "Top";
         //public static final String objectCamera = "USB_Camera";
         // Cam mounted facing forward, half a meter forward of center, half a meter up from center.
-        public static final Transform3d kRobotToCam =
-                new Transform3d(new Translation3d(0.1778, -0.2794, 0.3112), new Rotation3d(0, 0, .175));
-
+        public static final Transform3d kBottomRobotToCam =
+                new Transform3d(new Translation3d(0.1778, -0.3112, 0.3112), new Rotation3d(0, 0, .175));
+        public static final Transform3d kTopRobotToCam =
+                new Transform3d(new Translation3d(0.0445, -0.2223, 1.0478), new Rotation3d(0, -.524, 0));
         // The layout of the AprilTags on the field
         public static final AprilTagFieldLayout kTagLayout =
                 AprilTagFieldLayout.loadField(AprilTagFields.kDefaultField);
