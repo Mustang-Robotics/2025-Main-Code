@@ -12,7 +12,8 @@ import frc.robot.Constants.ElevatorConstants;
 public class AutoCoralStation extends SequentialCommandGroup {
     public AutoCoralStation(Elevator elevator, Arm arm, Intake intake, LED led) {
         addCommands(
-            new WaitCommand(0.5),
+            //new WaitCommand(0.25),
+            new WaitCommand(.2),
             new LEDSolidRed(led),
             new ChangeAngle(arm, ElevatorConstants.kArmTravel),
             new ChangeHeight(elevator, ElevatorConstants.kCorralStation),

@@ -4,6 +4,7 @@
 
 package frc.robot.subsystems;
 
+import com.revrobotics.RelativeEncoder;
 import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
@@ -16,17 +17,28 @@ public class Climb extends SubsystemBase {
   /** Creates a new Climb_Motor. */
 
   private final SparkMax m_climb = new SparkMax(8, MotorType.kBrushless);
-
-
+  
+  
   public Climb() {
       m_climb.configure(
       Configs.Climb.climbConfig,
       ResetMode.kResetSafeParameters,
       PersistMode.kPersistParameters);
+      m_climb.getEncoder().setPosition(0);
   }
 
   public void setClimbSpeed(double speed) {
-    m_climb.set(speed);
+
+    if((m_climb.getEncoder().getPosition() < 1.8*100) || 
+    (m_climb.getEncoder().getPosition() >= 1.75*100 && speed <= 0)) {
+      m_climb.set(speed);
+    }else{
+      m_climb.set(0);
+    }
+  }
+
+  public double get_climb_encoder(){
+    return m_climb.getEncoder().getPosition();
   }
 
 }

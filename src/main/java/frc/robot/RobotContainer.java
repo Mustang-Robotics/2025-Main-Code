@@ -97,6 +97,8 @@ public class RobotContainer {
     NamedCommands.registerCommand("L4", new L4(m_elevator, m_arm));
     NamedCommands.registerCommand("Outtake", new IntakeSetSpeed(m_intake, 0.25));
     NamedCommands.registerCommand("Intake", new AutoCoralStation(m_elevator, m_arm, m_intake, m_led));
+    NamedCommands.registerCommand("Auto Algae", new RemoveAlgae(m_robotDrive, m_arm, m_intake, m_led));
+    NamedCommands.registerCommand("L2", new L2(m_elevator, m_arm));
     buildPathCommands();
     configureButtonBindings();
     m_led.SolidGreen();
@@ -110,12 +112,14 @@ public class RobotContainer {
     );
         
         m_climb.setDefaultCommand(
-          new RunCommand(
-            () -> m_climb.setClimbSpeed(m_driverController.getRightTriggerAxis()-m_driverController.getLeftTriggerAxis()),
-          m_climb));
-        //m_intake.setDefaultCommand(new SetIntake(m_intake));
-//PathPlannerPath A = PathPlannerPath.fromPathFile("A");
-  }
+          
+            new RunCommand(
+            () -> m_climb.setClimbSpeed(
+              m_driverController.getRightTriggerAxis()
+              -m_driverController.getLeftTriggerAxis()),
+              m_climb));
+            }
+  
 
   /**
    * Use this method to define your button->command mappings. Buttons can be
@@ -133,6 +137,7 @@ public class RobotContainer {
         .whileTrue(new RunCommand(
             () -> m_robotDrive.setX(),
             m_robotDrive));
+    
     m_driverController.b()
         .whileTrue(new StartEndCommand(() -> m_intake.setIntakeSpeed(.2), () -> m_intake.setIntakeSpeed(0), m_intake));
     //Operator Controller Configs
@@ -146,7 +151,7 @@ public class RobotContainer {
       .onTrue(new ParallelCommandGroup(new L3(m_elevator, m_arm), new LEDSolidYellow(m_led)));
     m_driverController.rightBumper()
       .onFalse(new RemoveAlgae(m_robotDrive, m_arm, m_intake, m_led));
-      m_driverController.a()
+    m_driverController.a()
       .onTrue(new L2(m_elevator, m_arm));
     m_driverController.x()
       .onTrue(new L3(m_elevator, m_arm));

@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.0774697837496126,
-        "y": 5.092411296908761
+        "x": 1.6258440229198343,
+        "y": 4.922554074128656
       },
       "isLocked": false,
       "linkedName": "Coral Left End"
@@ -20,8 +20,8 @@
         "y": 5.261523747007178
       },
       "prevControl": {
-        "x": 3.093984848105355,
-        "y": 5.618519281931068
+        "x": 3.2197033385583684,
+        "y": 6.040687006350286
       },
       "nextControl": null,
       "isLocked": false,
@@ -33,8 +33,8 @@
   "pointTowardsZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 1.5,
-    "maxAcceleration": 1.0,
+    "maxVelocity": 4.0,
+    "maxAcceleration": 3.5,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 360.0,
     "nominalVoltage": 12.0,
@@ -42,7 +42,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -59.596575525494245
+    "rotation": -59.99999999999999
   },
   "reversed": false,
   "folder": null,

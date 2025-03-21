@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 4.964879244104797,
-        "y": 5.317155933745559
+        "x": 4.970783260569719,
+        "y": 5.31314989199491
       },
       "isLocked": false,
       "linkedName": "J Start"
@@ -20,8 +20,8 @@
         "y": 5.305
       },
       "prevControl": {
-        "x": 5.212329714359067,
-        "y": 5.576933257475811
+        "x": 5.204105697722366,
+        "y": 5.563213761115074
       },
       "nextControl": null,
       "isLocked": false,
@@ -33,8 +33,8 @@
   "pointTowardsZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 1.5,
-    "maxAcceleration": 1.0,
+    "maxVelocity": 4.0,
+    "maxAcceleration": 3.5,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 360.0,
     "nominalVoltage": 12.0,
@@ -42,13 +42,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -119.98164136476669
+    "rotation": -119.99999999999999
   },
   "reversed": false,
   "folder": null,
   "idealStartingState": {
-    "velocity": 0.3,
-    "rotation": -119.82447536243038
+    "velocity": 0.5,
+    "rotation": -119.99999999999999
   },
   "useDefaultConstraints": true
 }
