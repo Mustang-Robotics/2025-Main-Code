@@ -18,7 +18,7 @@ public class AutoCoralStation extends SequentialCommandGroup {
             new ChangeAngle(arm, ElevatorConstants.kArmTravel),
             new ChangeHeight(elevator, ElevatorConstants.kCorralStation),
             new ChangeAngle(arm, ElevatorConstants.kCorralStationArm),
-            new IntakeCurrentStop(intake, 0.2),
+            new IntakeCurrentStop(intake, 0.15),
             new LEDSolidGreen(led),
             new IntakeSetSpeed(intake, -.15),
             new WaitCommand(.15),

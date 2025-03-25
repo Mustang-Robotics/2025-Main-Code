@@ -114,11 +114,11 @@ public final class Constants {
   }
 
   public static class ElevatorConstants {
-    public static final double kL1Height = 0;
-    public static final double kL2Height = 400;
-    public static final double kL3Height = 1350;
-    public static final double kL4Height = 2900;
-    public static final double kCorralStation = 40;
+    public static final double kL1Height = 20;
+    public static final double kL2Height = 420;
+    public static final double kL3Height = 1370;
+    public static final double kL4Height = 2920;
+    public static final double kCorralStation = 60;
     public static final double kArmTravel = 55;
     public static final double kL4Arm = 78;
     public static final double kL2_3Arm = 83;
