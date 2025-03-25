@@ -115,6 +115,7 @@ public final class Constants {
     public static final double kFreeSpeedRpm = 6784;
   }
 
+<<<<<<< HEAD
   public static class ElevatorHeights {
     public static final double kL1Height = 0;
 <<<<<<< HEAD
@@ -127,6 +128,14 @@ public final class Constants {
     public static final double kL3Height = 1200;
     public static final double kL4Height = 2900;
     public static final double kCorralStation = 40;
+=======
+  public static class ElevatorConstants {
+    public static final double kL1Height = 20;
+    public static final double kL2Height = 420;
+    public static final double kL3Height = 1370;
+    public static final double kL4Height = 2920;
+    public static final double kCorralStation = 60;
+>>>>>>> 2fe887a (Done?)
     public static final double kArmTravel = 55;
     public static final double kL4Arm = 73;
     public static final double kL2_3Arm = 83;

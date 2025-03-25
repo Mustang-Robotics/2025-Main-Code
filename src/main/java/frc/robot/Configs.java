@@ -117,6 +117,7 @@ public final class Configs {
                 .feedbackSensor(FeedbackSensor.kAbsoluteEncoder)
                 .p(.001)
                 .outputRange(-.5, .5)
+                .positionWrappingEnabled(true)
                 .maxMotion
                 .maxVelocity(100000)
                 .maxAcceleration(100000)

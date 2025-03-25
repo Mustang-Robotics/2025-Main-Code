@@ -26,7 +26,21 @@ public class Climb extends SubsystemBase {
   }
 
   public void setClimbSpeed(double speed) {
+<<<<<<< HEAD
     m_climb.set(speed);
+=======
+
+    if((m_climb.getEncoder().getPosition() < 1.9*100) || 
+    (m_climb.getEncoder().getPosition() >= 1.9*100 && speed <= 0)) {
+      m_climb.set(speed);
+    }else{
+      m_climb.set(0);
+    }
+  }
+
+  public double get_climb_encoder(){
+    return m_climb.getEncoder().getPosition();
+>>>>>>> 2fe887a (Done?)
   }
 
 }
