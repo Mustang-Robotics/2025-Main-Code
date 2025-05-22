@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.path.PathPlannerPath;
+import frc.robot.commands.CoralStation;
 
 /*
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -80,8 +81,7 @@ public class RobotContainer {
     
     //Operator Controller Configs
     m_operatorController.pov(270)
-      .onTrue(new RunCommand(
-      () -> m_elevator.changeSetpoint(ElevatorHeights.kL1Height)));
+      .onTrue(new CoralStation(m_elevator, m_arm));
     m_operatorController.pov(180)
       .onTrue(new RunCommand(
       () -> m_elevator.changeSetpoint(ElevatorHeights.kL2Height)));
